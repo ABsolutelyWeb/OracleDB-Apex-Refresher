@@ -1,0 +1,41 @@
+How does Oracle Database run our queries?
+
+	- We are using a tool called "Apex" to play around with the Oracle Database.
+	- Somewhere in the Oracle server, they have the Oracle Database installed.
+	- On this machine, the Oracle software is installed.
+	
+	When we hit "Run" after writing a query in Apex, the SQL statement is sent
+	to the Oracle Database which checks SQL validity. If it's correct, it sends
+	us the requested data. But what is happening behind the scenes?
+	
+		- Say we run SELECT ... FROM emp WHERE sal = 4000;, this statement will
+		  be sent to the Oracle Database and the software will first look at the
+		  FROM clause. It needs to figure out the source AKA where it can get the
+		  data from.
+		  
+		- Let's say it found the table. The interpreter identifies the table and 
+		  then loads the data.
+		
+		- Then the interpreter examines the WHERE clause and checks the conditions. 
+		  Once all conditions have been met, it brings the results to another result
+		  set for further filtering.
+		  
+		- Then interpreter will take the data it has gathered and then examine what 
+		  data we want to see by looking at the SELECT clause. Based on the SELECT
+		  clause, the results are filtered into a subset of what we want to see.
+		  
+		  
+		To review:
+		
+			1. Oracle interpreter examines the query and ensures that it is valid 
+			   and parsable. If it isn't, it will throw the appropriate error.
+			   
+			2. If the query is valid, it goes to the FROM clause to see where it
+			   can find the data and loads it.
+			   
+			3. The interpreter then goes to the WHERE clause to see what records
+			   need to be filtered and ensures that conditions are met. Then it
+			   loads those records.
+			   
+			4. Then it moves on to the SELECT clause and filters out the columns
+			   that the user wishes to see.
