@@ -39,3 +39,15 @@ How does Oracle Database run our queries?
 			   
 			4. Then it moves on to the SELECT clause and filters out the columns
 			   that the user wishes to see.
+			   
+NOTE: 
+
+	- Oracle Database does NOT use the familiar "LIMIT" clause. Instead, we can do
+	  something like "FETCH FIRST 5 ROWS" which will do as it says. See docs for 
+	  more options.
+	  
+	  EXAMPLES:
+	  
+	  - FETCH FIRST 5 ROWS ONLY
+	  - FETCH FIRST 5% ROWS ONLY
+	  - FETCH FIRST 5 ROWS WITH TIES; <-- Get first N rows, if Nth row has ties, get all the tied rows

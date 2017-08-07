@@ -52,4 +52,49 @@ FROM emp
 WHERE ename = 'BLAKE' AND job = 'MANAGER';
 
 
--- 8. 
+-- 8. Find everyone who isn't a clerk and has a salary less than 3000.
+
+SELECT *
+FROM emp
+WHERE sal < 3000 AND job != 'CLERK';
+
+
+-- 9. Find everyone whose commission is greater than their salary.
+
+SELECT *
+FROM emp
+WHERE comm > sal;
+
+
+-- 10. Find all employees whose names start with "A."
+
+SELECT *
+FROM emp
+WHERE ename LIKE 'A%';
+
+
+-- 11. Find the top 5 highest earning employees.
+
+SELECT *
+FROM emp
+ORDER BY sal DESC
+FETCH FIRST 5 ROWS ONLY;
+
+
+-- 12. Find the top 10% of all lowest earning employees based on salary.
+
+SELECT *
+FROM emp
+ORDER BY sal ASC
+FETCH FIRST 10 PERCENT ROWS ONLY;
+
+
+-- 13. Find all employees who aren't managers and have a salary greater than 2500
+--	   and work in dept 20.
+
+SELECT *
+FROM emp
+WHERE job != 'MANAGER' AND sal > 2500 AND deptno = 20;
+
+
+-- 14. 
