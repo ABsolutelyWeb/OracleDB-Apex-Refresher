@@ -67,5 +67,12 @@ NOTE 3:
 	
 NOTE 4:
 		
-	- CONCAT in Oracle Database only accepts 2 arguments. If you have more than 2, you need to use || operator.
-		- For example, select 'a'||'b'||'c'||'d'   <-- Can only be used to concatenate strings.
+	- CONCAT in Oracle Database only accepts 2 arguments. If you have more than 2, you need to use || operator
+	  instead.
+	  
+		- For example, select 'a'||'b'||'c'||'d' will yield abcd while CONCAT would yield a "too many
+		  arguments" error.
+		- Or you can be sneaky and do the following:
+		CONCAT(CONCAT(CONCAT(lower(ename), upper(' is the name ')), lower(' and their job is: ')), job)
+		- Just keep wrapping everything in CONCATs if you are trying to combine more than two columns.
+		

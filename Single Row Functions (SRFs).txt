@@ -1,0 +1,162 @@
+SINGLE ROW FUNCTIONS (SRFs)
+
+	- Act on one row at a time and return a single value.
+	- UPPER / LOWER and CONCAT are examples of SRFs.
+	- SRFs don't necessarily always have to be in SELECT clauses. They can also be in WHERE
+	  clauses for filtering.
+	
+	
+	- INITCAP
+	
+		- Capitalizes the first character of every word.
+		
+		- USAGE: INITCAP('hello world') ---> Hello World
+		
+	
+	- LENGTH
+	
+		- Returns the length of the argument.
+		
+		- USAGE: LENGTH('Hello') ---> 5
+		
+		- Useful for finding people with long names or even to assist in truncating.
+		
+	
+	- SUBSTR
+	
+		- Returns a substring. First argument takes the string, second argument takes the 
+		  starting point, third argument takes the number of character to take from string.
+		
+		- OR you can provide just two arguments where first argument is the string and the 
+		  second argument is the starting point. This will print everything from the starting
+		  point onwards.
+		
+		- USAGE:  SUBSTR('hello', 2, 4) ---> ello
+		- USAGE:  SUBSTR('hello, everybody', 3) ---> llo, everybody
+		
+	
+	- LPAD / RPAD (Left / Right Pad)
+	
+		- Used to add characters to the left of a given string. The first argument is the
+		  string we want to add characters to. The second argument is how long the string should
+		  be after characters have been added. The third argument is what we want to add.
+		  
+		- In short, it creates a padding to the left of any character we choose.
+
+		- USAGE: LPAD('Money', 8, '$') ---> $$$Money
+		
+		- NOTE: If the second argument (integer) is less than the length of the string, it will
+		        take away character from the right. 
+				
+				- For example, "Money" is 5 characters. If we select LPAD('Money', 4, '$') then
+				  it will yield "Mone" because that's the length we specified. If we want padding
+				  to the left, we need the int argument to be greater than the length of the string.
+		  
+		- NOTE 2: RPAD exists as well and works the same way, but with right padding.
+		
+		
+	- LTRIM / RTRIM
+	
+		- Get rid of extra characters we don't want. Useful for truncating.
+		
+		- Takes two arguments: First one is the string and second is the character that we want 
+		  trimmed. If the character we want trimmed does not exist on the left or right of the string, 
+		  then nothing is trimmed and we get the original string back.
+		  
+		- USAGE: LTRIM('hello', 'h') ---> ello
+		- USAGE2: LTRIM('wwwwwwwwelcome', 'w') ---> elcome
+		
+		
+	- TRUNC	
+		
+		- Works like ROUND except it doesn't round up or down. It just removes the digit.
+		
+		- USAGE: TRUNC(122.229, 2) ---> 122.22
+		- USAGE 2: TRUNC(122.229) ---> 122
+		- USAGE 3: TRUNC(122.229, -1) ---> 120
+		- USAGE 4: TRUNC(122.229, -2) ---> 100
+		- USAGE 5: TRUNC(122.229, -3) ---> 0
+		
+	
+	- TO_CHAR
+	
+		- Adds proper formatting for dates. Converts to character.
+		
+		- USAGE: TO_CHAR(sysdate, 'Month DD, YYYY') ---> August 1st, 2017
+		
+		- USAGE 2: TO_CHAR(123, '$999.99') ---> $123.00
+		
+		- USAGE 3: TO_CHAR(sysdate, 'MM-DD-YYYY') ---> 08-08-2017
+		
+		- USAGE 4: Turn int into char ---> TO_CHAR(20) ---> 20 (as a char datatype)
+		
+	
+	- NULLIF
+	
+		- Assign NULL value if a condition is met.
+		
+		- Takes two arguments and if both args are equal, it returns a NULL.
+		
+		- USAGE: NULLIF(length(ename), 5) ---> Will say NULL wherever name length is 5.
+	
+	
+	FOR MORE SRF FUNCTIONS, GO TO: 
+	
+	https://www.techonthenet.com/oracle/functions/index.php
+	
+	
+	
+DATE FUNCTIONS
+
+
+	- SYSDATE
+	
+		- Requires no arguments and returns current date in mm/dd/yyyy format. The date depends on 
+		  where the database is installed AKA this is not your local date.
+		
+		- USAGE: sysdate ---> mm/dd/yyyy
+		
+	
+	- SYSTIMESTAMP
+	
+		- Works like SYSDATE except it returns the time AND date of the location where the database 
+		  is stored. Once again, this is NOT your local time.
+		
+		- USAGE: sysdatetime ---> 08-AUG-17 10.37.21.252798 AM -07:00
+		
+		
+	- ADD_MONTHS
+	
+		- Takes two arguments: the date in 'm/dd/yyyy' and an integer for the number of months.
+		  It then adds the number to the number of months in the date you provided.
+		  
+		- USAGE: ADD_MONTHS('09/21/2015', 9) ---> 06/21/2016
+		
+		- Can also be used to subtract months:
+		
+			- ADD_MONTHS('09/21/2015', -9) --- > 12/21/2014
+			
+		
+	- MONTHS_BETWEEN
+	
+		- Takes two dates and returns the difference in terms of number of months.
+		
+		- USAGE: MONTHS_BETWEEN('08/07/2017', '11/02/2015') ---> 21.1612903225806451612903225806451612903
+		
+		
+	- TRUNC(date, 'MONTH')
+	
+		- Removes information we don't want.
+		
+		- USAGE: TRUNC(systimestamp) ---> 08/08/2017
+		
+		- USAGE 2: TRUNC(systimestamp, 'YEAR')  --->  01/01/2017  AKA first date of the year.
+		
+		- USAGE 3: TRUNC(sysdatetime, 'MONTH')  ---> 08/01/2017  AKA first date of the month.
+		
+	
+	- TO_DATE
+	
+		- Convert a string into a date value.
+		
+		- USAGE: TO_DATE('2012-08-27', 'YYYY-MM-DD') ---> 08/27/2012
