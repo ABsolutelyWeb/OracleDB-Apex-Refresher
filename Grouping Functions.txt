@@ -1,0 +1,19 @@
+GROUPING FUNCTIONS
+
+	- In dealing with single rows, if we are working with single row functions, getting 4 single 
+	  rows would yield in an output of 4 single rows.
+	  
+	- Grouping functions are different. Rather than taking 4 rows and outputting 4 rows, grouping
+	  functions take 4 rows and output 1 row as a "super row" or a collection of rows. Examples
+	  of grouping functions include COUNT, SUM, AVG, MAX / MIN. They take many rows and output 
+	  a single collection of rows.
+	  
+	  NOTE: 
+
+		- SQL query order:
+			1. SELECT
+			2. FROM
+			3. WHERE
+			4. GROUP BY
+			5. HAVING
+			6. ORDER BY

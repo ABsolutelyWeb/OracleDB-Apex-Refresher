@@ -272,4 +272,100 @@ SELECT ename, length(ename) AS "Length", NVL(TO_CHAR(NULLIF(length(ename), 5)), 
 FROM emp;
 
 
--- 36. 
+-- 36. Use MAX / MIN to find the highest / lowest salary.
+
+SELECT TO_CHAR(MAX(sal), '$99,000.99') AS "SALARY"
+FROM emp;
+
+SELECT TO_CHAR(MIN(sal), '$99,000.99') AS "SALARY"
+FROM emp;
+
+
+-- 37. How much does this company spend on employees in terms of salaries.
+
+SELECT TO_CHAR(SUM(sal), '$99,999.99') AS "TOTAL SALARIES"
+FROM emp;
+
+
+-- 38. What is the amount paid to the highest earning manager?
+
+SELECT TO_CHAR(MAX(sal), '$99,999.99') AS "Highest Manager Salary"
+FROM emp
+WHERE job = 'MANAGER';
+
+
+-- 39. What is the average salary for all employees in this company?
+
+SELECT TO_CHAR(AVG(sal), '$99,999.99') AS "AVERAGE SALARY"
+FROM emp;
+-- OR --
+SELECT TO_CHAR((SUM(sal) / COUNT(*)), '$99,999.99') AS "AVG"
+FROM emp;
+
+
+-- 40. How many employees does this company have?
+
+SELECT COUNT(*) AS "TOTAL EMPLOYEES"
+FROM emp;
+
+
+-- 41. How many employees take commission?
+
+SELECT COUNT(*)
+FROM emp
+WHERE comm IS NOT NULL;
+-- OR --
+SELECT COUNT(comm)
+FROM emp;
+
+
+-- 42. Take the total salaries and divide by the total number of
+-- 	   employees who take commission.
+
+SELECT TO_CHAR((SUM(sal) / COUNT(comm)), '$99,999.99')
+FROM emp;
+
+
+-- 43. What are the highest / lowest salaries for each job type? Also return
+--     the number of employees, salary range, and average for each job type.
+--     We also only want job types that have more than 1 employee.
+
+SELECT job, TO_CHAR(MIN(sal), '$99,999.99') AS "Lowest Salary", 
+			TO_CHAR(MAX(sal), '$99,999.99') AS "Highest Salary", 
+			TO_CHAR(AVG(sal), '$99,999.99') AS "Average Salary", 
+			TO_CHAR((MAX(sal) - MIN(sal)), '$99,999.99') AS "Range", 
+			COUNT(*) AS "# of Employees"
+FROM emp
+GROUP BY job
+HAVING COUNT(*) > 1
+ORDER BY job ASC;
+
+
+-- 44. Return the job positions that only have 2 people.
+
+SELECT job, COUNT(job) AS "TOTAL"
+FROM emp
+GROUP BY job
+HAVING COUNT(job) = 2
+ORDER BY job ASC;
+
+
+-- 45. Return department numbers that have more than 3 employees working in
+--     them.
+
+SELECT deptno, COUNT(job)
+FROM emp
+GROUP BY deptno
+HAVING COUNT(job) > 3
+ORDER BY deptno ASC;
+
+
+-- 46. Find out how many of each job types work at particular departments.
+
+SELECT deptno, job, COUNT(job)
+FROM emp
+GROUP BY deptno, job
+ORDER BY deptno ASC;
+
+
+-- 47. 
