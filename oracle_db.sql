@@ -368,4 +368,35 @@ GROUP BY deptno, job
 ORDER BY deptno ASC;
 
 
--- 47. 
+-- 47. NESTED QUERY: Find every dept entry where the deptno is 30.
+
+SELECT *
+FROM dept
+WHERE deptno = (SELECT deptno FROM dept WHERE deptno = 30);
+
+
+-- 48. QUERY-CEPTION
+
+SELECT * FROM (SELECT * FROM (SELECT * FROM (SELECT * FROM emp)))
+
+
+-- 49. Find all employees who belong to a Chicago-based department. Do NOT use
+--     joins. MUST use sub-query.
+
+SELECT *
+FROM emp
+WHERE deptno = (SELECT deptno FROM dept WHERE loc = 'CHICAGO');
+
+
+-- 50. Find all employees who belong to a departments 10 and 20. Do NOT use
+--     joins. MUST use sub-query.
+
+SELECT *
+FROM emp
+WHERE deptno in (SELECT deptno FROM dept WHERE deptno in (10, 20));
+
+
+-- 51. 
+
+SELECT job, ename, (SELECT job FROM emp)
+FROM emp;

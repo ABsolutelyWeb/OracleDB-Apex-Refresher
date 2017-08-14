@@ -1,0 +1,6 @@
+MULTI-TABLE QUERIES AND JOINS
+
+	What is a nested query?
+	
+		- A nested query is a SELECT statement within another SELECT statement.
+		- See exercises 47-49.
