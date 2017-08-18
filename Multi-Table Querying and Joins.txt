@@ -1,6 +1,18 @@
 MULTI-TABLE QUERIES AND JOINS
 
+	See MySQL repo for JOINS.
+
 	What is a nested query?
 	
 		- A nested query is a SELECT statement within another SELECT statement.
 		- See exercises 47-49.
+		
+	EXISTS
+	
+		- Used in combination with a subquery.
+		
+		e.g:
+			
+			SELECT *
+			FROM emp
+			WHERE EXISTS (SELECT 'random' FROM dual)
